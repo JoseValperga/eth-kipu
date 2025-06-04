@@ -2,7 +2,7 @@
 pragma solidity ^0.8.28;
 
 // Uncomment this line to use console.log
-//Jose Valperga
+//Jose Valperga prueba con deploy en Sepolia
 import "hardhat/console.sol";
 
 contract Lock {
