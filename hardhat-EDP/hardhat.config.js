@@ -1,11 +1,11 @@
 
-require("@nomicfoundation/hardhat-toolbox");
+import "@nomicfoundation/hardhat-toolbox";
 
 const ALCHEMY_API_KEY = "https://eth-sepolia.g.alchemy.com/v2/QBY4IyvKeKsNSwCz6VLf1";
 const SEPOLIA_PRIVATE_KEY = "73850337be51cf2a75cf6afa2627d93ebe8b6d476b8a513272803b866434bcfc";
 const ETHERSCAN_API_KEY = "KRZ4RZYSQZINTGN7QTZ1I866HQPMWX3UU5";
 
-module.exports = {
+const config = {
   solidity: "0.8.28",
   networks: {
     sepolia: {
@@ -17,5 +17,7 @@ module.exports = {
     apiKey: {
       sepolia: ETHERSCAN_API_KEY,
     },
-  },
-};
+  }
+}
+
+export default config;
