@@ -161,12 +161,18 @@ contract SimpleBank {
         (bool success, ) = treasury.call{value: _amount}("");
         require(success, "Fallo en la transferencia de ETH desde la tesoreria");
     }
+
     /**
      * @dev Función para retirar todos los fondos del contrato
      * Solo el propietario puede llamar a esta función
      * Se utiliza en caso de emergencia
      */
     function emergencyWithdraw() public onlyOwner {
-        payable(owner).transfer(address(this).balance);
+        uint256 contractBalance = address(this).balance;
+        require(contractBalance > 0, "No hay fondos para retirar");
+        users[msg.sender].balance = 0;
+        emit TreasuryWithdrawal(msg.sender, contractBalance);
+        (bool success, ) = payable(owner).call{value: contractBalance}("");
+        require(success, "Fallo en la transferencia de emergencia");
     }
 }
