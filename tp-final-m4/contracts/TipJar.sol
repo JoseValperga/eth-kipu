@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-//https://sepolia.etherscan.io/address/0x1af16451c6cd632E83078cF0D0e7bcd90E1994D3#code
 
 pragma solidity ^0.8.28;
 
@@ -55,15 +54,18 @@ contract TipJar is ReentrancyGuard {
         return address(this).balance;
     }
 
-    //Devuelve la cantidad de propinas recibidas
-    function getTipsCount() external view returns (uint256) {
+    //Devuelve la cantidad de propinas recibidas, accesible solo al owner
+    function getTipsCount() external view onlyOwner returns (uint256) {
         return tips.length;
     }
 
-    //Devuelve la propina en el índice `i`
-    function getTip(uint256 i)
+    //Devuelve información de la propina en el índice `i`, accesible solo al owner
+    function getTip(
+        uint256 i
+    )
         external
         view
+        onlyOwner
         returns (
             address from,
             uint256 amount,
@@ -75,7 +77,7 @@ contract TipJar is ReentrancyGuard {
         return (t.from, t.amount, t.message, t.timestamp);
     }
 
-    //Devuelve todas las propinas
+    //Devuelve información de todas las propinas, accesible solo al owner
     function getAllTips() external view onlyOwner returns (Tipper[] memory) {
         return tips;
     }
