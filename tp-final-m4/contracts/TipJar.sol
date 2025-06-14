@@ -46,6 +46,7 @@ contract TipJar is ReentrancyGuard {
         uint256 _balance = address(this).balance;
         (bool success, ) = payable(owner).call{value: _balance}("");
         require(success, "Withdrawal failed");
+        delete tips; // Limpiar las propinas después del retiro
         emit Withdrawal(owner, _balance);
     }
 

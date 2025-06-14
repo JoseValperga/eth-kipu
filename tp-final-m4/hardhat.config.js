@@ -4,13 +4,12 @@ dotenv.config();
 
 const {
   ALCHEMY_URL,
-  SEPOLIA_PRIVATE_KEY_OWNER,
-  TIPJAR_ADDRESS
+  SEPOLIA_PRIVATE_KEY_OWNER
 } = process.env;
 
-if (!ALCHEMY_URL || !SEPOLIA_PRIVATE_KEY_OWNER || !TIPJAR_ADDRESS) {
+if (!ALCHEMY_URL || !SEPOLIA_PRIVATE_KEY_OWNER) {
   console.error(
-    "❌ Variables de entorno faltantes. Define ALCHEMY_URL, SEPOLIA_PRIVATE_KEY_OWNER, SEPOLIA_PRIVATE_KEY_USER y TIPJAR_ADDRESS."
+    "❌ Variables de entorno faltantes. Define ALCHEMY_URL, SEPOLIA_PRIVATE_KEY_OWNER."
   );
   process.exit(1);
 }

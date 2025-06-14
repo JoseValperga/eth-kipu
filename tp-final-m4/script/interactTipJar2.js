@@ -57,7 +57,7 @@ async function readBalanceOwner() {
   console.log(`💰 Balance del contrato: ${ethers.formatEther(balance)} ETH`);
   return balance;
 }
-
+/*
 async function readBalanceUser() {
   try {
     const balance = await tipJarUser.getBalance();
@@ -67,6 +67,7 @@ async function readBalanceUser() {
     console.log("⛔ El USER no tiene permiso para leer el balance:", err.message);
   }
 }
+*/ 
 
 async function readTipsCountOwner() {
   const count = await tipJar.getTipsCount();
@@ -74,6 +75,7 @@ async function readTipsCountOwner() {
   return count;
 }
 
+/*
 async function readTipsCountUser() {
   try {
     const count = await tipJarUser.getTipsCount();
@@ -84,6 +86,7 @@ async function readTipsCountUser() {
     console.log("⛔ El USER no tiene permiso para leer el número de propinas:", err.message);
   }
 }
+*/
 
 async function readLastTipOwner() {
   const count = await readTipsCountOwner();
@@ -104,6 +107,7 @@ async function readLastTipOwner() {
   }
 }
 
+/*
 async function readLastTipUser() {
   try {
     const count = await readTipsCountUser();
@@ -126,6 +130,7 @@ async function readLastTipUser() {
     console.log("⛔ El USER no tiene permiso para leer la última propina:", err.message);
   }
 }
+*/
 
 async function withdrawFundsOwner() {
   console.log("→ Retirando fondos al OWNER…");
@@ -135,6 +140,7 @@ async function withdrawFundsOwner() {
   return tx;
 }
 
+/*
 async function withdrawFundsUser() {
   console.log("→ Retirando fondos al USER…");
   try {
@@ -147,6 +153,7 @@ async function withdrawFundsUser() {
   }
   return null;
 }
+*/
 
 async function readAllTipsOwner() {
   const allTips = await tipJar.getAllTips();
@@ -166,34 +173,35 @@ async function readAllTipsOwner() {
 
 async function main() {
   console.log("🔄 Iniciando interacción con TipJar...");
+
   await getOwner();
 
   console.log("Interacción con propinas owner");
   await sendTipOwner("¡Excelente trabajo!", "0.005");
   await readBalanceOwner();
   console.log(" ");
-
+/*
   console.log("Interacción con propinas user");
   await sendTipUser("¡Excelente trabajo!", "0.005");
   await readBalanceUser();
   console.log(" ");
-
+*/
   console.log("Interacción con cantidad de propinas owner");
   await readTipsCountOwner();
   console.log(" ");
-
+/*
   console.log("Interacción con cantidad de propinas user");
   await readTipsCountUser();
   console.log(" ");
-
+*/
   console.log("Interacción con última propina owner");
   await readLastTipOwner();
   console.log(" ");
-
+/*
   console.log("Interacción con última propina user");
   await readLastTipUser();
   console.log(" ");
-
+*/
   console.log("Interacción todas las propinas recibidas");
   await readAllTipsOwner();
   console.log(" ");
@@ -201,11 +209,11 @@ async function main() {
   console.log("Interacción con retiro de fondos owner");
   await withdrawFundsOwner();
   console.log(" ");
-
+/*
   console.log("Interacción con retiro de fondos user");
   await withdrawFundsUser();
   console.log(" ");
-
+*/
   console.log("✅ Interacción con TipJar completada");
   console.log("🔚 Fin de la interacción");
 }
