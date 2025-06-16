@@ -34,7 +34,7 @@ Una vez desplegado el contrato:
    VITE_CONTRACT_ADDRESS=0xTU_DIRECCION_DE_CONTRATO
    ```
 
-2. **Copiar el ABI del contrato** desde Etherscan o desde el archivo generado por Hardhat (`artifacts/contracts/TipJar.sol/TipJar.json`) y pegarlo en:
+2. **Copiar el ABI del contrato** desde Etherscan o desde el archivo generado por Hardhat (`ignition/deploymets/chain-11155111/artifacts/TipJar#TipJar.json` - el 11155111 corresponde a la red Sepolia) y pegarlo en:
 
    `src/contracts/TipJar.js`
 
@@ -110,7 +110,7 @@ VITE_CONTRACT_ADDRESS=0xTU_DIRECCION_DE_CONTRATO
    > ⚠️ Reemplazá `0xTU_DIRECCION_DE_CONTRATO` por la dirección real del contrato desplegado en Sepolia u otra testnet compatible con MetaMask.
 
 
-4. **Copiar el ABI del contrato** desde Etherscan o desde el archivo generado por Hardhat (`artifacts/contracts/TipJar.sol/TipJar.json`) y pegarlo en:
+4. **Copiar el ABI del contrato** desde Etherscan o desde el archivo generado por Hardhat (`/ignition/deploymets/chain-11155111/artifacts/TipJar#TipJar.json` - el 11155111 corresponde a la red Sepolia) y pegarlo en:
 
    `src/contracts/TipJar.js`
 
