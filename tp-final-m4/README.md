@@ -76,8 +76,8 @@ contract TipJar is ReentrancyGuard {
 1. **Cloná este repositorio:**
 
 ```bash
-git clone https://github.com/JoseValperga/eth-kipu/tree/main/tp-final-m4
-cd eth-kipu/tp-final-m4
+git clone https://github.com/JoseValperga/tipjar_ethereum.git
+cd tipjar_ethereum
 ```
 
 2. **Instalá las dependencias:**
@@ -91,7 +91,7 @@ npm install
 ```env
 ALCHEMY_API_KEY=tu_api_key_de_alchemy
 SEPOLIA_PRIVATE_KEY_OWNER=clave_privada_owner
-SEPOLIA_PRIVATE_KEY_USER=clave_privada_owner
+SEPOLIA_PRIVATE_KEY_USER=clave_privada_user
 ETHERSCAN_API_KEY=tu_api_key_de_etherscan
 ```
 
@@ -103,23 +103,48 @@ ETHERSCAN_API_KEY=tu_api_key_de_etherscan
 npx hardhat compile
 ```
 
-5. **Desplegá el contrato en Sepolia:**
+5. **Desplegá y verifica el contrato en Sepolia:**
 
 ```bash
-npx hardhat run scripts/deploy.js --network sepolia
+npx hardhat ignition deploy ignition/modules/TipJar.js --network sepolia --verify
 ```
 
-6. **Verificá el contrato en Etherscan:**
+6. **Obtén la dirección del contrato en Etherscan y agregala en tu .env:**
 
-```bash
-npx hardhat verify --network sepolia TU_DIRECCION_DEL_CONTRATO
+    A estar atento -> Cuando se hace el deploy aparece en la terminal
+
+```env
+ALCHEMY_API_KEY=tu_api_key_de_alchemy
+SEPOLIA_PRIVATE_KEY_OWNER=clave_privada_owner
+SEPOLIA_PRIVATE_KEY_USER=clave_privada_user
+ETHERSCAN_API_KEY=tu_api_key_de_etherscan
+TIPJAR_ADDRESS=address de tu contrato en Etherscan obtenida
 ```
 
 ---
 
-## 🧪 Testing (opcional)
+## 🧪 Interacción con el contrato 
 
-Podés agregar un archivo de test en `test/TipJar.test.js` para automatizar pruebas del contrato usando Hardhat + Chai.
+Podés interactuar con el el contrato de varias maneras.
+
+- Instalá la versión del [contrato](https://github.com/JoseValperga/tipjar_react) en React e interactuá desde ahí
+
+- Utilizar /scripts/interactTipJar.js para testear con dos cuentas (owner y user)
+```bash
+npx hardhat run /scripts/interactTipJar.js
+```
+- Utilizar /scripts/interactTipJarOwner.js para testear solo como owner
+```bash
+npx hardhat run /scripts/interactTipJarOwner.js
+```
+
+## 🧪 Testing 
+
+Podés testear el contrato (`test/TipJar.test.js`) para automatizar pruebas usando Hardhat + Chai.
+
+```bash
+npx hardhat test
+```
 
 ---
 

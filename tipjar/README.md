@@ -18,9 +18,9 @@ Esta es una aplicación descentralizada (dApp) desarrollada en React + Vite que 
 
 Antes de ejecutar esta aplicación, es **imprescindible** desplegar el contrato inteligente `TipJar.sol` en una red Ethereum compatible (como Sepolia).
 
-### 📍 El contrato se encuentra en:
+### 📍 El repositorio del contrato se encuentra en:
 
-🔗 [https://github.com/JoseValperga/eth-kipu/tree/main/tp-final-m4](https://github.com/JoseValperga/eth-kipu/tree/main/tp-final-m4)
+🔗 [Repositorio GitHub](https://github.com/JoseValperga/tipjar_ethereum)
 
 ---
 
@@ -34,7 +34,7 @@ Una vez desplegado el contrato:
    VITE_CONTRACT_ADDRESS=0xTU_DIRECCION_DE_CONTRATO
    ```
 
-2. **Copiar el ABI del contrato** desde Etherscan o desde el archivo generado por Hardhat (`ignition/deploymets/chain-11155111/artifacts/TipJar#TipJar.json` - el 11155111 corresponde a la red Sepolia) y pegarlo en:
+2. **Copiar el ABI del contrato** desde Etherscan o desde el archivo generado por Hardhat (probablemente `ignition/deploymets/chain-11155111/artifacts/TipJar#TipJar.json` - el 11155111 corresponde a la red Sepolia) y pegarlo en:
 
    `src/contracts/TipJar.js`
 
@@ -85,8 +85,8 @@ VITE_CONTRACT_ADDRESS=0xTU_DIRECCION_DE_CONTRATO
 1. **Cloná el repositorio**:
 
    ```bash
-   git clone https://github.com/tu-usuario/tipjar-frontend.git
-   cd tipjar-frontend
+   git clone https://github.com/JoseValperga/tipjar_react.git
+   cd tipjar-react
    ```
 
 2. **Instalá las dependencias**:
@@ -110,7 +110,7 @@ VITE_CONTRACT_ADDRESS=0xTU_DIRECCION_DE_CONTRATO
    > ⚠️ Reemplazá `0xTU_DIRECCION_DE_CONTRATO` por la dirección real del contrato desplegado en Sepolia u otra testnet compatible con MetaMask.
 
 
-4. **Copiar el ABI del contrato** desde Etherscan o desde el archivo generado por Hardhat (`/ignition/deploymets/chain-11155111/artifacts/TipJar#TipJar.json` - el 11155111 corresponde a la red Sepolia) y pegarlo en:
+4. **Copiar el ABI del contrato** desde Etherscan o desde el archivo generado por Hardhat (probablemente `/ignition/deploymets/chain-11155111/artifacts/TipJar#TipJar.json` - el 11155111 corresponde a la red Sepolia) y pegarlo en:
 
    `src/contracts/TipJar.js`
 
