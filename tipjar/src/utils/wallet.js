@@ -1,4 +1,5 @@
-//compruebo si MetaMask está instalado y conecto la wallet
+//solo lo utilicé para comprobar inicialmente si MetaMask está instalado y conectado la wallet
+//no lo utilicé en el código final
 
 import { ethers } from "ethers";
 

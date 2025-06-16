@@ -10,6 +10,7 @@ function App() {
   const [isOwner, setIsOwner] = useState(false);
   const [balance, setBalance] = useState(null);
   const [tips, setTips] = useState([]);
+  const [ranking, setRanking] = useState([]);
 
   // Conectar wallet
   const connectWallet = async () => {
@@ -40,22 +41,44 @@ function App() {
     await tx.wait();
     alert("Propina enviada");
     setMessage("");
+    if (isOwner) loadOwnerData();
   };
 
-  // Obtener balance y tips si sos owner
+  // Cargar datos del owner (balance + propinas + ranking)
   const loadOwnerData = async () => {
     if (!tipJar || !isOwner) return;
+
     const bal = await tipJar.getBalance();
     setBalance(ethers.formatEther(bal));
 
-    const tipsArray = await tipJar.getAllTips();
-    const parsed = tipsArray.map((tip) => ({
+    const allTips = await tipJar.getAllTips();
+    const parsed = allTips.map((tip) => ({
       from: tip.from,
       amount: ethers.formatEther(tip.amount),
       message: tip.message,
       timestamp: new Date(Number(tip.timestamp) * 1000).toLocaleString(),
     }));
     setTips(parsed);
+
+    // Calcular ranking por dirección
+    const aggregated = {};
+    parsed.forEach((tip) => {
+      if (!aggregated[tip.from]) {
+        aggregated[tip.from] = { total: 0, count: 0 };
+      }
+      aggregated[tip.from].total += parseFloat(tip.amount);
+      aggregated[tip.from].count += 1;
+    });
+
+    const rankingArray = Object.entries(aggregated)
+      .map(([from, data]) => ({
+        from,
+        total: data.total,
+        count: data.count,
+      }))
+      .sort((a, b) => b.total - a.total); // orden descendente
+
+    setRanking(rankingArray);
   };
 
   // Retirar fondos
@@ -66,7 +89,15 @@ function App() {
     alert("Fondos retirados");
     setTips([]);
     setBalance("0");
+    setRanking([]);
   };
+
+  // Detectar cambio de cuenta
+  useEffect(() => {
+    if (window.ethereum) {
+      window.ethereum.on("accountsChanged", () => window.location.reload());
+    }
+  }, []);
 
   useEffect(() => {
     if (isOwner) {
@@ -86,6 +117,9 @@ function App() {
         <div>
           <p>Cuenta conectada: <strong>{account}</strong></p>
           <p>Rol: {isOwner ? "👑 Owner" : "🧑 Usuario"}</p>
+          <p className="text-sm text-gray-600">
+            Cambiá de cuenta desde MetaMask si querés enviar desde otra.
+          </p>
 
           <div className="mt-4 space-y-2">
             <input
@@ -114,7 +148,7 @@ function App() {
                 Retirar fondos
               </button>
 
-              <h3 className="mt-4 font-bold">📜 Propinas recibidas:</h3>
+              <h3 className="mt-4 font-bold">📜 Historial de Propinas:</h3>
               {tips.length === 0 ? (
                 <p>No hay propinas registradas</p>
               ) : (
@@ -124,6 +158,20 @@ function App() {
                       <p><strong>{tip.from}</strong> envió {tip.amount} ETH</p>
                       <p>🗨️ "{tip.message}"</p>
                       <p className="text-sm text-gray-500">{tip.timestamp}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              <h3 className="mt-6 font-bold">🏆 Ranking de Tippers:</h3>
+              {ranking.length === 0 ? (
+                <p>Sin ranking</p>
+              ) : (
+                <ul className="space-y-2 mt-2">
+                  {ranking.map((entry, idx) => (
+                    <li key={idx} className="border p-2">
+                      <p>#{idx + 1} <strong>{entry.from}</strong></p>
+                      <p>Total: {entry.total.toFixed(4)} ETH en {entry.count} tips</p>
                     </li>
                   ))}
                 </ul>
